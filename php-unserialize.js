@@ -162,6 +162,37 @@ function unserialize (data) {
 
           dataoffset += 1;
           break;
+
+        case 'o':
+          readdata = {};
+          ccount = read_until(data, dataoffset, ':');
+          chrs = ccount[0];
+          stringlength = ccount[1];
+          dataoffset += chrs + 2;
+          readData = read_chrs(data, dataoffset + 1, parseInt(stringlength, 10));
+          chrs = readData[0];
+          var className = readData[1];
+          dataoffset += chrs + 2;
+          keyandchrs = read_until(data, dataoffset, ':');
+          chrs = keyandchrs[0];
+          keys = keyandchrs[1];
+          dataoffset += chrs + 2;
+          for(var i = 0; i < parseInt(keys, 10); i++) {
+            var kprops = _unserialize(data, dataoffset);
+            var kchrs = kprops[1];
+            var key = kprops[2];
+            dataoffset += kchrs;
+            var vprops = _unserialize(data, dataoffset);
+            var vchrs = vprops[1];
+            var value = vprops[2];
+            dataoffset += vchrs;
+            if(typeof value !== 'undefined' && typeof key === 'string' && key.charCodeAt(0)) {
+              readdata[key] = value;
+            }
+          }
+          dataoffset += 1;
+          break;
+          
         default:
           error('SyntaxError', 'Unknown / Unhandled data type(s): ' + dtype);
           break;
