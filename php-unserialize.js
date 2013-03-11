@@ -156,7 +156,6 @@ function unserialize (data) {
             vchrs = vprops[1];
             value = vprops[2];
             dataoffset += vchrs;
-
             readdata[key] = value;
           }
 
@@ -173,6 +172,7 @@ function unserialize (data) {
           chrs = readData[0];
           var className = readData[1];
           dataoffset += chrs + 2;
+          readdata['phpObjName']=className;
           keyandchrs = read_until(data, dataoffset, ':');
           chrs = keyandchrs[0];
           keys = keyandchrs[1];
