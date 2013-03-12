@@ -2,7 +2,7 @@
   "author": "Nicolas Chambrier <naholyr@gmail.com> (http://naholyr.fr)",
   "name": "php-unserialize",
   "description": "tool to unserialize data taken from PHP. It can parse \"serialize()\" output, or even serialized sessions data.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/naholyr/js-php-unserialize.git"
